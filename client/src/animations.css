@@ -1,0 +1,197 @@
+/* =========================================================
+   WORKNEAR — CSS-only motion library
+   Glows, auroras, gradient shifts, ripples, pulses, cascades.
+   Paired with animations.js (Framer Motion variants).
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- Aurora background (CTA sections, hero glows) ---------- */
+@keyframes wn-aurora-shift {
+  0%   { transform: translate(-4%, -2%) scale(1) rotate(0deg); }
+  50%  { transform: translate(4%, 3%) scale(1.15) rotate(8deg); }
+  100% { transform: translate(-4%, -2%) scale(1) rotate(0deg); }
+}
+
+.wn-aurora-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 45% at 20% 25%, rgba(20, 184, 166, 0.55), transparent 65%),
+    radial-gradient(32% 40% at 80% 30%, rgba(249, 115, 22, 0.35), transparent 65%),
+    radial-gradient(45% 50% at 50% 85%, rgba(139, 92, 246, 0.3), transparent 65%);
+  filter: blur(40px);
+  animation: wn-aurora-shift 14s ease-in-out infinite;
+}
+
+/* ---------- Glow pulse (used for "great match" style highlights) ---------- */
+@keyframes wn-glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.28); }
+  50%      { box-shadow: 0 0 0 14px rgba(15, 118, 110, 0); }
+}
+
+.wn-glow-pulse {
+  animation: wn-glow-pulse 2.6s ease-in-out infinite;
+}
+
+/* ---------- Match card breathing highlight ---------- */
+@keyframes wn-match-pulse {
+  0%, 100% { box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(24, 169, 118, 0.25); }
+  50%      { box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2), 0 0 0 10px rgba(24, 169, 118, 0); }
+}
+
+.wn-match-card-pulse {
+  animation: wn-match-pulse 3s ease-in-out infinite;
+}
+
+/* ---------- Gradient shift (animated brand gradient text/fills) ---------- */
+@keyframes wn-gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.wn-gradient-animated {
+  background: linear-gradient(120deg, #0f766e, #14b8a6, #f97316, #0f766e);
+  background-size: 300% 300%;
+  animation: wn-gradient-shift 6s ease infinite;
+}
+
+/* ---------- Ripple (buttons) ---------- */
+@keyframes wn-ripple {
+  from { transform: scale(0); opacity: 0.45; }
+  to   { transform: scale(2.6); opacity: 0; }
+}
+
+.wn-ripple-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.wn-ripple-wrap .wn-ripple-el {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  transform: scale(0);
+  animation: wn-ripple 0.6s ease-out forwards;
+  pointer-events: none;
+}
+
+/* ---------- Badge / urgent pulse ---------- */
+@keyframes wn-badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.55); }
+  70%      { box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+}
+
+.wn-job-urgent {
+  animation: wn-badge-pulse 2.2s ease-in-out infinite;
+}
+
+/* ---------- Skill chip cascade (staggered entrance via nth-child delay) ---------- */
+@keyframes wn-chip-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.wn-job-skill,
+.wn-job-skill-more {
+  animation: wn-chip-in 0.4s var(--wn-ease, cubic-bezier(0.2, 0.8, 0.2, 1)) both;
+}
+.wn-job-skill:nth-child(1) { animation-delay: 0.05s; }
+.wn-job-skill:nth-child(2) { animation-delay: 0.11s; }
+.wn-job-skill:nth-child(3) { animation-delay: 0.17s; }
+.wn-job-skill:nth-child(4) { animation-delay: 0.23s; }
+.wn-job-skill-more { animation-delay: 0.29s; }
+
+/* ---------- Job cover image: hover scale + gentle warm tint ---------- */
+.wn-job-image img {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.5s ease;
+}
+.wn-job-link:hover .wn-job-image img {
+  filter: saturate(1.08) brightness(1.02);
+}
+
+/* ---------- Breathing logo mark (auth pages) ---------- */
+@keyframes wn-breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+
+.wn-logo-breathe {
+  animation: wn-breathe 2.6s ease-in-out infinite;
+}
+
+/* ---------- Input focus glow ring ---------- */
+@keyframes wn-focus-ring {
+  from { box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.35); }
+  to   { box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.14); }
+}
+
+.wn-input-wrap {
+  transition: transform 0.2s var(--wn-ease, ease);
+}
+.wn-input-wrap:focus-within {
+  transform: translateY(-1px);
+}
+.wn-input-wrap:focus-within .wn-input-icon {
+  color: var(--wn-primary);
+  transform: translateY(-50%) scale(1.1);
+}
+.wn-input-wrap input:focus {
+  animation: wn-focus-ring 0.25s ease forwards;
+}
+
+/* ---------- Input icon (auth forms) ---------- */
+.wn-input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--wn-text-muted, #8a948f);
+  transition: color 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+/* ---------- Active nav underline (framer layoutId handles motion; this is the resting style) ---------- */
+.wn-nav-underline {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--wn-primary);
+}
+
+/* ---------- Button loading morph ---------- */
+.wn-btn-morph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: width 0.3s var(--wn-ease, ease);
+}
+
+@keyframes wn-spin {
+  to { transform: rotate(360deg); }
+}
+.wn-spin {
+  animation: wn-spin 0.9s linear infinite;
+  display: inline-block;
+}
+.wn-btn-spinner {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  animation: wn-spin 0.7s linear infinite;
+}

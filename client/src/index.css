@@ -1,0 +1,416 @@
+/* =========================================================
+   WORKNEAR — GLOBAL RESPONSIVE FOUNDATION
+   ========================================================= */
+
+:root {
+  --wn-primary: #0f766e;
+  --wn-primary-light: #14b8a6;
+  --wn-primary-dark: #115e59;
+
+  --wn-accent: #f97316;
+  --wn-purple: #8b5cf6;
+
+  --wn-bg: #f7f8f5;
+  --wn-surface: #ffffff;
+  --wn-surface-soft: #f1f5f3;
+
+  --wn-text: #17211f;
+  --wn-text-soft: #64706d;
+  --wn-text-secondary: #55625f;
+  --wn-text-muted: #8a948f;
+  --wn-border: rgba(23, 33, 31, 0.09);
+  --wn-success: #18a976;
+  --wn-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --wn-radius-sm: 10px;
+  --wn-radius-md: 16px;
+  --wn-radius-lg: 24px;
+
+  --wn-shadow-sm:
+    0 4px 16px rgba(15, 23, 42, 0.06);
+
+  --wn-shadow-md:
+    0 12px 35px rgba(15, 23, 42, 0.09);
+
+  --wn-shadow-lg:
+    0 25px 70px rgba(15, 23, 42, 0.13);
+
+  --wn-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.08);
+
+  --wn-container: 1280px;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: var(--wn-text);
+  background: var(--wn-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  overflow-x: hidden;
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(20, 184, 166, 0.06),
+      transparent 30%
+    ),
+    var(--wn-bg);
+
+  color: var(--wn-text);
+}
+
+#root {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+main {
+  position: relative;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: anywhere;
+}
+
+.container,
+.wn-container {
+  width: min(
+    calc(100% - clamp(24px, 4vw, 64px)),
+    var(--wn-container)
+  );
+
+  margin-inline: auto;
+}
+
+/* =========================================================
+   FLUID TYPOGRAPHY
+   ========================================================= */
+
+h1 {
+  font-size: clamp(2.25rem, 5vw, 5.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3.2vw, 3.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.65rem);
+  line-height: 1.15;
+}
+
+p {
+  line-height: 1.65;
+}
+
+/* =========================================================
+   RESPONSIVE GRID
+   ========================================================= */
+
+.wn-grid {
+  display: grid;
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.wn-grid-auto {
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(min(100%, 280px), 1fr)
+    );
+}
+
+.wn-grid-small {
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(min(100%, 220px), 1fr)
+    );
+}
+
+.wn-grid-large {
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(min(100%, 360px), 1fr)
+    );
+}
+
+/* =========================================================
+   FLUID FLEX
+   ========================================================= */
+
+.wn-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(12px, 2vw, 24px);
+}
+
+.wn-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(12px, 2vw, 24px);
+}
+
+/* =========================================================
+   FLUID SPACING
+   ========================================================= */
+
+.wn-section {
+  padding-block: clamp(44px, 5vw, 80px);
+}
+
+.wn-section-sm {
+  padding-block: clamp(32px, 4vw, 56px);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn,
+.wn-btn {
+  min-height: 44px;
+
+  border-radius: var(--wn-radius-sm);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+
+  touch-action: manipulation;
+}
+
+.btn:hover,
+.wn-btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active,
+.wn-btn:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-width: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* =========================================================
+   RESPONSIVE MEDIA
+   ========================================================= */
+
+.wn-media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--wn-radius-lg);
+}
+
+.wn-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================================
+   SAFE FLEX CHILDREN
+   ========================================================= */
+
+.wn-flex > *,
+.wn-flex-between > *,
+.d-flex > * {
+  min-width: 0;
+}
+
+/* =========================================================
+   PREVENT LONG CONTENT FROM BREAKING LAYOUT
+   ========================================================= */
+
+.text-break,
+.wn-break {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* =========================================================
+   MOBILE / TABLET BEHAVIOUR
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .wn-flex-between {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .wn-flex-between > * {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .container,
+  .wn-container {
+    width: calc(100% - 28px);
+  }
+
+  .wn-section {
+    padding-block: 48px;
+  }
+
+  .wn-section-sm {
+    padding-block: 32px;
+  }
+
+  .btn,
+  .wn-btn {
+    min-height: 46px;
+  }
+
+  .table-responsive {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .container,
+  .wn-container {
+    width: calc(100% - 22px);
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* Bootstrap Primary Overrides (Green theme) */
+.btn-primary {
+  background-color: var(--wn-primary);
+  border-color: var(--wn-primary);
+  color: #fff;
+}
+.btn-primary:hover, .btn-primary:focus-visible, .btn-primary:active {
+  background-color: var(--wn-primary-dark);
+  border-color: var(--wn-primary-dark);
+  color: #fff;
+}
+.btn-outline-primary {
+  color: var(--wn-primary);
+  border-color: var(--wn-primary);
+}
+.btn-outline-primary:hover, .btn-outline-primary:focus-visible, .btn-outline-primary:active {
+  background-color: var(--wn-primary);
+  border-color: var(--wn-primary);
+  color: #fff;
+}
+.text-primary { color: var(--wn-primary) !important; }
+.bg-primary { background-color: var(--wn-primary) !important; }
+a { color: var(--wn-primary); }
+a:hover { color: var(--wn-primary-dark); }
+.form-control:focus, .form-select:focus {
+  border-color: var(--wn-primary-light);
+  box-shadow: 0 0 0 0.25rem rgba(20, 184, 166, 0.25);
+}
