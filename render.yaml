@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: worknear-backend
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        value: mongodb+srv://worknear:worknear123@cluster0.ihiwnai.mongodb.net/?appName=Cluster0
+      - key: JWT_SECRET
+        value: worknear_super_secret_jwt_key_change_in_production_2026
+      - key: JWT_EXPIRE
+        value: 7d
+      - key: CLIENT_URL
+        value: "*"
