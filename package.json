@@ -1,0 +1,27 @@
+{
+  "name": "worknear",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WorkNear - Hyperlocal Employment & Workforce Matching Platform",
+  "scripts": {
+    "build": "npm --prefix client install && npm --prefix client run build",
+    "start": "node server/server.js",
+    "test": "npm --prefix server test"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.2.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.0",
+    "morgan": "^1.10.0",
+    "multer": "^2.3.0",
+    "natural": "^8.0.1",
+    "nodemailer": "^9.0.5"
+  }
+}
