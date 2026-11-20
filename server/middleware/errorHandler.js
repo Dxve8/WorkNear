@@ -7,12 +7,22 @@
 const fs = require('fs');
 const path = require('path');
 
+// Serverless platforms (Vercel) have a read-only filesystem, so file logging
+// is disabled there; console output is captured by the platform's runtime logs.
+const IS_SERVERLESS = !!process.env.VERCEL;
 const LOG_DIR = path.join(__dirname, '../logs');
 const ERROR_LOG = path.join(LOG_DIR, 'error.log');
+let fileLoggingEnabled = false;
 
-// Ensure diagnostic log directory is initialized
-if (!fs.existsSync(LOG_DIR)) {
-  fs.mkdirSync(LOG_DIR, { recursive: true });
+if (!IS_SERVERLESS) {
+  try {
+    if (!fs.existsSync(LOG_DIR)) {
+      fs.mkdirSync(LOG_DIR, { recursive: true });
+    }
+    fileLoggingEnabled = true;
+  } catch (err) {
+    console.warn('File logging disabled:', err.message);
+  }
 }
 
 // ============================================================================
@@ -30,7 +40,8 @@ const logErrorToFile = (errorInfo) => {
       timestamp,
       ...errorInfo,
     });
-    fs.appendFileSync(ERROR_LOG, logEntry + '\n');
+    console.error(logEntry);
+    if (fileLoggingEnabled) fs.appendFileSync(ERROR_LOG, logEntry + '\n');
   } catch (err) {
     console.error('Failed to append to error log:', err);
   }
