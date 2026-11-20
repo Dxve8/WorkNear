@@ -1,6 +1,5 @@
-﻿const natural = require("natural");
-const TfIdf = natural.TfIdf;
-const PorterStemmer = natural.PorterStemmer;
+﻿const TfIdf = require("natural/lib/natural/tfidf/tfidf");
+const PorterStemmer = require("natural/lib/natural/stemmers/porter_stemmer");
 
 // ═══════════════════════════════════════════════════════════════════════════════
 //  UTILITY HELPERS
